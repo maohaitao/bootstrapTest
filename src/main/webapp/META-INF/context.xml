@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Context path="/jiuyangshenggong" docBase="jiuyangshenggong" reloadable="false" crossContext="true" debug="0">
+    <Valve className="org.apache.catalina.valves.AccessLogValve"
+           directory="D:/data/project/log/jiuyangshengong/accesslog" prefix="access."
+           pattern="%{X-Real-IP}i %l %u %t %r %s %b --%D--    %{User-Agent}i" resolveHosts="false"
+           fileDateFormat="yyyy-MM-dd"/>
+
+</Context>
