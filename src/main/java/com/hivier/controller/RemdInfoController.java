@@ -2,6 +2,7 @@ package com.hivier.controller;
 
 import com.hivier.business.RemdInfoBusiness;
 import com.google.gson.JsonObject;
+import com.hivier.model.HivierProductInfo;
 import com.sf.common.log.LogService;
 import com.sf.common.model.CommonRequest;
 import com.sf.common.model.DynamicResult;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 /**
  * @author hesin
@@ -21,36 +23,16 @@ import java.io.IOException;
  * @date 2015/8/19
  */
 @Controller
-public class RemdInfoController extends BaseController {
+public class RemdInfoController {
 
     @Autowired
     private RemdInfoBusiness remdInfoBusiness;
 
-    @Override
-    public DynamicResult handleBusiness(CommonRequest r) throws Exception {
-        return remdInfoDeal(r);
+    @RequestMapping(value = "/remdinfo.shtml")
+    public String handleBusiness(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        List<HivierProductInfo> types = remdInfoBusiness.remdInfo();
+        request.setAttribute("list",types);
+        return "index";
     }
 
-    public DynamicResult remdInfoDeal(CommonRequest r) {
-        DynamicResult result = new DynamicResult();
-        String typeid = JsonUtil.getValue(r.getJsonData(), "typeid");
-        String mark = JsonUtil.getValue(r.getJsonData(), "mark");
-        Integer must = JsonUtil.getValue(r.getJsonData(), "must", 0);
-        Integer pageid = JsonUtil.getValue(r.getJsonData(), "pageid", 0);
-        long servertime = System.currentTimeMillis();
-
-        JsonObject types = remdInfoBusiness.remdInfo(typeid, mark, must,pageid);
-        result.put("types", types);
-        result.put("servertime", servertime); //活动信息
-        return result;
-    }
-
-    @RequestMapping("/remdinfo.shtml")
-    public void remdInfo(HttpServletRequest request, HttpServletResponse response) {
-        try {
-            dealService(request, response);
-        } catch (IOException e) {
-            LogService.error("remdInfo：", e);
-        }
-    }
 }

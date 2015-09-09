@@ -1,6 +1,8 @@
 package com.hivier.business;
 
-import com.google.gson.JsonObject;
+import com.hivier.model.HivierProductInfo;
+
+import java.util.List;
 
 /**
  * @author hesin
@@ -10,7 +12,6 @@ import com.google.gson.JsonObject;
  */
 public interface RemdInfoBusiness {
 
-    public JsonObject remdInfo(String typeid, String mark, Integer must, Integer pageid);
+    public List<HivierProductInfo> remdInfo();
 
-    public boolean initRemdInfo();// 初始化数据
 }

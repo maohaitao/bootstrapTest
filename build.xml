@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project name="bootstrapTest" default="dist" basedir="src">
+    <description>
+        simple example build file
+    </description>
+    <!-- set global properties for this build -->
+    <property name="dist" location="target"/>
+    <property name="app" value="bootstrapTest"/>
+    <target name="makedir">
+        <echo message="mkdir ${dist}/zip/${app}"/>
+        <mkdir dir="${dist}/zip/${app}"/>
+    </target>
+
+
+    <target name="zip_clear" depends="clean,makedir">
+        <echo message="##########copy META-INF to dist!"/>
+        <copy todir="${dist}/zip/${app}">
+            <fileset dir="${dist}/${app}">
+                <!--<include name="**/*.class"/>-->
+                <!--<exclude name="**/*PbTask.class" />-->
+                <!--<include name="**/*.jar"/>-->
+
+                <!-- <include name="**/*.class"/>
+                 <include name="**/context.xml"/>
+                 <include name="**/*.jar"/>
+                 <include name="**/*redis.properties"/>
+                 <exclude name="**/*.jar" />
+                 <exclude name="**/*.jsp" />
+                 <exclude name="**/*.sql" />
+                 <exclude name="**/*.xml"/>
+                 <exclude name="**/*.properties"/>
+                 <include name="**/*"/>
+                 <include name="**/*.properties"/>
+                 <include name="**/qqconfig.properties"/>
+                 <include name="**/weiboconfig.properties"/>
+                 <include name="**/*.class"/>
+                 <include name="**/web.xml"/>
+                 <include name="**/log4j.properties"/>
+                 <include name="**/system.properties"/>
+                 <include name="**/*.jsp" />
+                 <include name="**/*.class"/>
+                 <include name="**/web.xml"/>
+                 <include name="**/*.js" />	*.css" />
+                 <include name="**/images/*.ico"/>
+                 <include name="**/context.xml"/>
+                 <include name="**/rsynclog.sh"/>
+
+                 <include name="**/flumelog.properties"/>
+                 <include name="**/log4j.properties"/>
+                 <include name="**/WEB-INF/*.*"/>
+                 <include name="**/web.xml"/>
+                 <include name="**/OpenidRedirectServlet.class"/>-->
+
+                <!-- global 1.0
+                <include name="**/facebook.properties"/>
+                <include name="**/twitter4j.properties"/>
+                <include name="**/google.properties"/>
+                <include name="**/*.class"/>
+                <include name="**/*.jar"/>
+                <include name="**/login-mobile.jsp" />
+                <include name="**/index-mobile.jsp" />
+                <include name="**/index.jsp" />
+                <include name="**/common.jsp" />
+                <include name="**/passport/*.jsp" />
+                <include name="**/openid/**" />
+                <include name="**/*.class"/>
+                <include name="**/web.xml"/>
+                <include name="**/ApplicationResources_zh-cn.properties"/>
+                <include name="**/facebook.properties"/>
+                <include name="**/twitter4j.properties"/>
+                <include name="**/google.properties"/>		 -->
+            </fileset>
+        </copy>
+    </target>
+
+    <target name="dist" depends="makedir" description="dist">
+        <copy todir="${dist}/zip/${app}">
+            <fileset dir="${dist}/${app}"/>
+        </copy>
+    </target>
+    <target name="clean" description="clean up">
+        <!-- Delete ${dist}/zip directory trees -->
+        <delete dir="${dist}/zip"/>
+    </target>
+
+    <target name="zip_all" depends="zip_clear">
+        <zip destfile="${dist}/zip/${app}.zip" basedir="${dist}/zip">
+        </zip>
+    </target>
+
+</project>

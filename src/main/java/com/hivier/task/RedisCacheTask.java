@@ -42,8 +42,8 @@ public class RedisCacheTask {
      */
     @Scheduled(fixedDelay = 1000 * 60 * 10)   //每10分钟执行一次全量
     public void initCache() {
-        boolean initRemdInfo = remdInfoBusiness.initRemdInfo();
-        LogService.info("初始化remdinfo数据：initRemdInfo=" + initRemdInfo + "|");
+//        boolean initRemdInfo = remdInfoBusiness.initRemdInfo();
+//        LogService.info("初始化remdinfo数据：initRemdInfo=" + initRemdInfo + "|");
         boolean initproInfo = jvmCacheService.putProductInfoList();
         LogService.info("初始化product数据：initproInfo=" + initproInfo + "|");
         time1h = DateUtil.getCurrentDate();
