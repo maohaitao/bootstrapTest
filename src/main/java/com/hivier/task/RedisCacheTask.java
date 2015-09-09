@@ -1,7 +1,7 @@
 package com.hivier.task;
 
-import com.hivier.business.ImageBusiness;
 import com.hivier.business.RemdInfoBusiness;
+import com.hivier.cache.JVMCacheService;
 import com.hivier.cache.RedisCacheService;
 import com.sf.common.log.LogService;
 import com.sf.common.util.DateUtil;
@@ -27,7 +27,7 @@ public class RedisCacheTask {
     @Autowired
     private RemdInfoBusiness remdInfoBusiness;
     @Autowired
-    private ImageBusiness imageBusiness;
+    private JVMCacheService jvmCacheService;
 
     /**
      * * @return 格式: [秒] [分] [小时] [日] [月] [周] [年]
@@ -44,8 +44,8 @@ public class RedisCacheTask {
     public void initCache() {
         boolean initRemdInfo = remdInfoBusiness.initRemdInfo();
         LogService.info("初始化remdinfo数据：initRemdInfo=" + initRemdInfo + "|");
-        boolean initImageInfo = imageBusiness.initCache();
-        LogService.info("初始化image数据：initImageInfo=" + initImageInfo + "|");
+        boolean initproInfo = jvmCacheService.putProductInfoList();
+        LogService.info("初始化product数据：initproInfo=" + initproInfo + "|");
         time1h = DateUtil.getCurrentDate();
     }
 
