@@ -24,15 +24,12 @@ import java.util.List;
  */
 @Controller
 public class RemdInfoController {
-
     @Autowired
     private RemdInfoBusiness remdInfoBusiness;
-
     @RequestMapping(value = "/remdinfo.shtml")
     public String handleBusiness(HttpServletRequest request, HttpServletResponse response) throws Exception {
         List<HivierProductInfo> types = remdInfoBusiness.remdInfo();
         request.setAttribute("list",types);
         return "index";
     }
-
 }
